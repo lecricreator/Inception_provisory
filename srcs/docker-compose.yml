@@ -31,7 +31,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ${PATH_LOCAL_FILE}/dbdata:/var/lib/mysql
+      - ${PATH_LOCAL_FILE}/mariadb:/var/lib/mysql
     networks:
       - internal
 
@@ -62,10 +62,11 @@ services:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_CONFIG_EXTRA: |
         define('FS_METHOD', 'direct');
-    user: "${UID}:${GID}"
+    #user: "${UID}:${GID}"
     volumes:
       - ${PATH_LOCAL_FILE}/wordpress/src/themes:/var/www/html/wp-content/themes
       - ${PATH_LOCAL_FILE}/wordpress/src/plugins:/var/www/html/wp-content/plugins
+      - ${PATH_LOCAL_FILE}/wordpress:/var/www/html
     networks:
       - internal
 
